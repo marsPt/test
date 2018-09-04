@@ -1,0 +1,46 @@
+spring: 
+  kafka:
+    producer:
+      bootstrap-servers: ${BOOTSTRAP_SERVER}
+      retries: ${RETRIES}
+      batch-size: ${BATCH_SIZE}
+      buffer-memory: ${BUFFER_MEMORY}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      ssl:
+        truststore-location: ${SSL_TRUSTSTORE_LOCATION}
+        truststore-password: ${SSL_TRUSTSTORE_PASSWORD}
+        key-password: ${SSL_KEY_PASSWORD} 
+        keystore-password: ${SSL_KEYSTORE_PASSWORD}
+        keystore-location:   ${SSL_KEYSTORE_LOCATION}
+    properties:
+      security.protocol: ${SECURITY}    
+      linger.ms: ${LINGER_MS}
+  jackson:
+    date-format: ${DATE_FORMAT}
+    time-zone:  ${TIME_ZONE}
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.jks
+    key-store-password: password
+    key-alias: selfsigned
+
+rtdm:
+  app:
+    # thread pool configuration for asynchronous send
+    core-pool-size:  ${CORE_POOL_SIZE}
+    maxPoolSize: ${MAX_POOL_SIZE}
+    queueCapacity: ${QUEUE_CAPACITY}
+    thread-name-prefix: AsyncRTDM-
+  sas2kafka:
+    owner: ${AUDIT_OWNER}
+    topic: ${TOPIC}
+    # kafka producer is asynchronous internally, so async sending may be a bit redundant
+    async-send: true
+    
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    com.accenture: DEBUG

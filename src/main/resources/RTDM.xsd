@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://localhost/WSSAS2KAFKA"
+	xmlns:tns="http://localhost/WSSAS2KAFKA" elementFormDefault="qualified">
+	<xs:element name="SendSASRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Message" type="tns:Message"
+					minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="SendSASResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="esito" maxOccurs="1" minOccurs="1"
+					type="tns:esitoType" />
+				<!-- <xs:element name="error_code" minOccurs="0" maxOccurs="1" type="xs:string"/> 
+					<xs:element name="error_description" minOccurs="0" maxOccurs="1" type="xs:string"/> -->
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="esitoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OK" />
+			<xs:enumeration value="KO" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="Message">
+		<xs:sequence>
+			<xs:element name="ID_CLIENTE_BIC" type="xs:string"
+				maxOccurs="1" minOccurs="1" />
+			<xs:element name="NR_CONT_GG_SDP" nillable="true" type="xs:int"
+				maxOccurs="1" minOccurs="1" />
+			<xs:element name="NR_SMS_GG_SDP" nillable="true" type="xs:int"
+				maxOccurs="1" minOccurs="1" />
+			<xs:element name="TREATMENT_NM" nillable="true" type="xs:string"
+				maxOccurs="1" minOccurs="1" />
+			<xs:element name="FL_TREAT_SMS" nillable="true" type="xs:string"
+				maxOccurs="1" minOccurs="1" />
+			<xs:element name="FL_SMS_ULT_TREAT_SDP" nillable="true" type="xs:string"
+				maxOccurs="1" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
